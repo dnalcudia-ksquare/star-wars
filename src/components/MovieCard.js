@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button, ImageListItem, ImageListItemBar } from '@mui/material';
 import BasicModal from './Modal';
 
-function MovieCard(props) {
+const MovieCard = (props) => {
   const { title, episode_id, opening_crawl, director, release_date, poster } =
     props;
 
@@ -18,15 +18,22 @@ function MovieCard(props) {
         title={title}
         subtitle={<span>by: {director}</span>}
       />
-      <ImageListItemBar
-        position='bottom'
-        title={<span>Released at: {release_date}</span>}
-        subtitle={
-          <Button onClick={handleOpen} variant='contained' color='success'>
-            See opening
-          </Button>
-        }
-      />
+      {opening_crawl ? (
+        <ImageListItemBar
+          position='bottom'
+          title={<span>Released at: {release_date}</span>}
+          subtitle={
+            <Button onClick={handleOpen} variant='contained' color='success'>
+              See opening
+            </Button>
+          }
+        />
+      ) : (
+        <ImageListItemBar
+          position='bottom'
+          title={<span>Released at: {release_date}</span>}
+        />
+      )}
       <BasicModal
         open={open}
         handleOpen={handleOpen}
@@ -36,6 +43,6 @@ function MovieCard(props) {
       />
     </ImageListItem>
   );
-}
+};
 
 export default MovieCard;
